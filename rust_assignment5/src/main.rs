@@ -66,7 +66,7 @@ fn assign_major(s: &mut Student, major: String) {
 // Higher order functions update major
 fn update_majors(collection: &mut Vec<Student>, behavior: fn(&mut Student, String)) {
     for student in collection.iter_mut() {
-        behavior(student, "Computer Science".to_string());
+        behavior(student, "CS".to_string());
     }
 }
 // Helper Method
