@@ -1,0 +1,6 @@
+[package]
+name = "rust_assigment4"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]

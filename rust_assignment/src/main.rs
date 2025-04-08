@@ -1,35 +1,64 @@
-// use std::fs;
-// use std::fs::File;
-// use std::io::Write;
+#[derive(Debug)]
+enum Insurance {
+    House,
+    Car,
+    Life,
+}
 
-// use std::io::{Read, BufReader, BufRead};
-// use std::fs::OpenOptions;
+#[derive(Debug)]
+struct Car {
+    model: String
+}
 
-use std::io::{self, Read, Write};
-
+#[derive(Debug)]
 struct Person {
     name: String,
-    sid: u32,
+    car: Car,
+    insurances: Vec<Insurance>,
+}
+
+impl Person {
+    fn new(n: String, c: Car) -> Person {
+        Person {
+            name: n,
+            car: c,
+            insurances: vec![],
+        }
+    }
+
+    fn add_insurance(&mut self, i: Insurance) {
+        self.insurances.push(i);
+    }
+
+    fn show_insurance(&self) {
+        println!("Hey I am {:?}. I have a next type of insurances", self);
+        for i in self.insurances.iter(){
+            match i {
+                Insurance::Car => println!("I insured my {:?}", self.car),
+                Insurance::House => println!("I insured my {:?}", self.house),
+                Insurance::House => println!("I insured my {:?}", self.life),
+            };
+        }
+    }
 }
 
 fn main() {
-    let mut buffer = String::new();
+    let my_c = Insurance::Car;
+    let my_h = Insurance::House;
+    let my_l = Insurance::Life;
 
-    print!("What's your name? ");
-    io::stdout().flush().unwrap();
-    io::stdin().read_line(&mut buffer).unwrap();
-    let name = buffer.trim().to_string();
-    print!("{}", buffer);
-    buffer.clear();
+    let car = Car {
+        model: "Toyota".to_string(),
+    };
 
-    print!("What's your student ID #? ");
-    io::stdout().flush().unwrap();
-    io::stdin().read_line(&mut buffer).unwrap();
-    let sid = buffer.trim().parse().unwrap();
-    let person = Person { name, sid };
-    buffer.clear();
-    
-    println!("Hi {}: your ID is {}!", person.name, person.sid);
+    let mut person = Person::new("John".to_string(), car);
+
+    person.add_insurance(my_c);
+    person.add_insurance(my_h);
+    person.add_insurance(my_l);
+    person.show_insurance();
+
+    println!("{:?}", person)
 }
 
 
