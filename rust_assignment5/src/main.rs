@@ -1,3 +1,4 @@
+// // Old Working Version
 // // Create a struct Student
 // #[derive(Debug)]
 // struct Student {
@@ -51,7 +52,6 @@
 
 
 //In class Assignment
-
 // Create a struct Student (major)
 #[derive(Debug)]
 struct Student {
@@ -65,8 +65,8 @@ fn assign_major(s: &mut Student, major: String) {
 
 // Higher order functions update major
 fn update_majors(collection: &mut Vec<Student>, behavior: fn(&mut Student, String)) {
-    for mut student in collection.iter() {
-        behavior(&student, "Computer Science".to_string());
+    for student in collection.iter_mut() {
+        behavior(student, "Computer Science".to_string());
     }
 }
 // Helper Method
@@ -84,16 +84,13 @@ fn print_students(student: &[Student]) {
 fn main() {
     //Create a vector of students 1,2,3 and update all students major
     let mut students = vec![
-        Student { major: String::new() },
-        Student { major: String::new() },
-        Student { major: String::new() },
+        Student { major: "CE".to_string() },
+        Student { major: "SE".to_string() },
+        Student { major: "EE".to_string() },
     ];
     
     // Update majors using the higher-order function
+    print_students(&students);
     update_majors(&mut students, assign_major);
     print_students(&students);
-    // // Print updated majors to confirm
-    // for (i, student) in students.iter().enumerate() {
-    //     println!("Student {}: Major = {}", i + 1, student.major);
-    // }
 }
