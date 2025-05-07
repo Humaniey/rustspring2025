@@ -1,0 +1,1 @@
+/workspaces/rustspring2025/financialdata_assignment/target/debug/finacialdata_assignment: /workspaces/rustspring2025/financialdata_assignment/src/main.rs
