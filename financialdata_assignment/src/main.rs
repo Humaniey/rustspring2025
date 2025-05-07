@@ -90,7 +90,7 @@ impl Pricing for Bitcoin {
 //  Implement Pricing Trait for Ethereum 
 impl Pricing for Ethereum {
     fn fetch_price(&mut self) -> Result<(), String> {
-        // Ethereum fetch handled outside (already fetched in main loop)
+        // Ethereum fetch handled outside of main loop
         Ok(())
     }
 
@@ -117,26 +117,25 @@ impl Pricing for SP500 {
     }
 
     fn print_price(&self) {
-        // Print the S&P 500 price to the terminal
+        // Print the S&P 500 price
         println!("S&P 500: ${:.2}", self.price);
     }
 }
 
-//  Main Loop to Fetch and Print Prices 
 fn main() {
     let mut sp500 = SP500 { price: 0.0 };
 
     loop {
-        // Print timestamp indicating start of data fetch
+        // Print start of data fetch
         println!(" Fetching prices @ {} ", Utc::now());
 
-        //  Fetch Bitcoin & Ethereum in ONE request 
+        //  Fetch Bitcoin & Ethereum
         match fetch_crypto_prices() {
             Ok((btc_price, eth_price)) => {
                 let btc = Bitcoin { price: btc_price };
                 let eth = Ethereum { price: eth_price };
 
-                // Print the fetched Bitcoin and Ethereum prices
+                // Print Bitcoin and Ethereum prices
                 btc.print_price();
                 eth.print_price();
             }
@@ -146,7 +145,7 @@ fn main() {
         //  Fetch SP500 Price Separately 
         match sp500.fetch_price() {
             Ok(_) => {
-                // Print the fetched S&P 500 price
+                // Print S&P 500 price
                 sp500.print_price();
             }
             Err(e) => eprintln!("SP500 fetch error: {}", e),
